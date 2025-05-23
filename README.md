@@ -54,7 +54,7 @@ This Android application serves as a dual-purpose input method that combines a b
 4. Build and run on a device or emulator with API level 28+
 
 ### Project Structure
-- `app/src/main/java/id/swtkiptr/keyboardscanner/` - Main source code
+- `app/src/main/java/id/swtkiptr/quickbarcodekeyboard/` - Main source code
   - `keyboard/` - Custom keyboard implementation
   - `scanner/` - Barcode scanner implementation
 - `app/src/main/res/` - Resource files
