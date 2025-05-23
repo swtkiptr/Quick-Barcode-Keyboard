@@ -157,10 +157,9 @@ class CustomKeyboardView @JvmOverloads constructor(
 
         keyboardLayout?.let { layout ->
             val rows = when (layout.layoutType) {
-                KeyboardLayout.LayoutType.QWERTY -> listOf(10, 9, 9, 5)
-                KeyboardLayout.LayoutType.SYMBOLS -> listOf(10, 9, 9, 5)
-                KeyboardLayout.LayoutType.SYMBOLS2 -> listOf(10, 9, 9, 5)
-
+                KeyboardLayout.LayoutType.QWERTY -> listOf(10, 11, 9, 5) // 11 for second row (9 keys + 2 spacing keys)
+                KeyboardLayout.LayoutType.SYMBOLS -> listOf(10, 12, 9, 5) // 12 for second row (10 keys + 2 spacing keys)
+                KeyboardLayout.LayoutType.SYMBOLS2 -> listOf(9, 12, 9, 5) // 12 for second row (10 keys + 2 spacing keys)
             }
 
             val availableWidth = width - (keySpacing * 2)
@@ -170,17 +169,16 @@ class CustomKeyboardView @JvmOverloads constructor(
             var yPosition = keySpacing * 2
 
             rows.forEach { keysInRow ->
-                var rowKeys = mutableListOf<Pair<KeyboardKey, Int>>()
-                var totalUnits = 0
+                var rowKeys = mutableListOf<Pair<KeyboardKey, Float>>()
+                var totalUnits = 0f
 
                 // Preprocess: calculate width units (to account for larger keys)
                 for (i in 0 until keysInRow) {
                     if (keyIndex >= layout.keys.size) break
                     val key = layout.keys[keyIndex]
                     val widthUnits = when {
-                        key.code == KeyboardKey.CODE_SPACE -> 3
-                        key.width > 1 -> key.width
-                        else -> 1
+                        key.code == KeyboardKey.CODE_SPACE && !key.isInvisible -> 3f
+                        else -> key.width
                     }
                     rowKeys.add(Pair(key, widthUnits))
                     totalUnits += widthUnits
@@ -189,10 +187,10 @@ class CustomKeyboardView @JvmOverloads constructor(
 
                 // Recalculate actualKeyWidth based on totalUnits
                 val spacingTotal = (rowKeys.size - 1) * keySpacing
-                val actualKeyWidth = (availableWidth - spacingTotal) / totalUnits
+                val actualKeyWidth = (availableWidth - spacingTotal) / totalUnits.toInt()
 
                 // Center the row
-                val rowPixelWidth = totalUnits * actualKeyWidth + spacingTotal
+                val rowPixelWidth = totalUnits.toFloat() * actualKeyWidth + spacingTotal
                 var xPosition = (width - rowPixelWidth) / 2
 
                 for ((key, widthUnits) in rowKeys) {
@@ -297,6 +295,9 @@ class CustomKeyboardView @JvmOverloads constructor(
         for (i in keyRects.indices) {
             val rectF = keyRectFs[i]
             val key = keyMap[i]
+            
+            // Skip invisible keys
+            if (key.isInvisible) continue
 
             // Only draw background for pressed keys
             if (i == pressedKeyIndex) {
@@ -421,6 +422,9 @@ class CustomKeyboardView @JvmOverloads constructor(
     private fun getTouchedKeyIndex(x: Float, y: Float): Int {
         // First check for exact hits (highest priority)
         for (i in keyRects.indices) {
+            // Skip invisible keys
+            if (keyMap[i].isInvisible) continue
+            
             if (keyRects[i].contains(x.toInt(), y.toInt())) {
                 return i
             }
@@ -428,6 +432,9 @@ class CustomKeyboardView @JvmOverloads constructor(
         
         // If no exact hit, check with expanded touch area
         for (i in keyRects.indices) {
+            // Skip invisible keys
+            if (keyMap[i].isInvisible) continue
+            
             val rect = keyRects[i]
             val expandedRect = RectF(
                 rect.left - TOUCH_TARGET_EXPANSION,

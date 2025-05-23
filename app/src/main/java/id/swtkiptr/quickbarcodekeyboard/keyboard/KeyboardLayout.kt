@@ -18,14 +18,24 @@ class KeyboardLayout(
         fun createQwertyLayout(): KeyboardLayout {
             val keys = mutableListOf<KeyboardKey>()
 
+            // First row - qwertyuiop
             "qwertyuiop".forEach { char ->
                 keys.add(KeyboardKey(char.code, char.toString()))
             }
 
+            // Second row - asdfghjkl with left and right spacing
+            // Add left spacing key (invisible)
+            keys.add(KeyboardKey(KeyboardKey.CODE_SPACE, "", width = 0.5f, isSpecial = true, isInvisible = true))
+            
+            // Add the actual keys
             "asdfghjkl".forEach { char ->
                 keys.add(KeyboardKey(char.code, char.toString()))
             }
+            
+            // Add right spacing key (invisible)
+            keys.add(KeyboardKey(KeyboardKey.CODE_SPACE, "", width = 0.5f, isSpecial = true, isInvisible = true))
 
+            // Third row - shift + zxcvbnm + delete
             keys.add(KeyboardKey(KeyboardKey.CODE_SHIFT, "⇧", isSpecial = true))
 
             "zxcvbnm".forEach { char ->
@@ -55,10 +65,17 @@ class KeyboardLayout(
                 keys.add(KeyboardKey(char.code, char.toString()))
             }
 
-            // Second row - symbols
+            // Second row - symbols with left and right spacing
+            // Add left spacing key (invisible)
+            keys.add(KeyboardKey(KeyboardKey.CODE_SPACE, "", width = 0.5f, isSpecial = true, isInvisible = true))
+            
+            // Add the actual keys
             "@#\$%&-+()".forEach { char ->
                 keys.add(KeyboardKey(char.code, char.toString()))
             }
+            
+            // Add right spacing key (invisible)
+            keys.add(KeyboardKey(KeyboardKey.CODE_SPACE, "", width = 0.5f, isSpecial = true, isInvisible = true))
 
             keys.add(KeyboardKey(KeyboardKey.CODE_TOGGLE, "#+=", isSpecial = true, targetLayout = LayoutType.SYMBOLS2))
 
@@ -90,11 +107,18 @@ class KeyboardLayout(
                 keys.add(KeyboardKey(char.code, char.toString()))
             }
 
-            // Second row - currency and other symbols (10 keys)
+            // Second row - currency and other symbols with left and right spacing
+            // Add left spacing key (invisible)
+            keys.add(KeyboardKey(KeyboardKey.CODE_SPACE, "", width = 0.5f, isSpecial = true, isInvisible = true))
+            
+            // Add the actual keys
             "£¢€¥^°={}".forEach { char ->
                 keys.add(KeyboardKey(char.code, char.toString()))
             }
             keys.add(KeyboardKey(KeyboardKey.CODE_TOGGLE, "123", isSpecial = true, targetLayout = LayoutType.SYMBOLS))
+            
+            // Add right spacing key (invisible)
+            keys.add(KeyboardKey(KeyboardKey.CODE_SPACE, "", width = 0.5f, isSpecial = true, isInvisible = true))
 
             // Third row - math and misc symbols (9 keys)
             "\\©®™℅[]".forEach { char ->
