@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Keyboard key dimensions -->
+    <dimen name="key_height">56dp</dimen>
+    <dimen name="key_spacing">3dp</dimen>
+    <dimen name="key_corner_radius">6dp</dimen>
+    <dimen name="key_text_size">28sp</dimen>
+    <dimen name="key_special_text_size">16sp</dimen>
+    <dimen name="key_preview_text_size">24sp</dimen>
+    <dimen name="key_preview_offset">-60dp</dimen>
+    <dimen name="key_preview_padding">10dp</dimen>
+
+    <!-- Scanner indicator dimensions -->
+    <dimen name="scanner_indicator_width">120dp</dimen>
+    <dimen name="scanner_indicator_height">120dp</dimen>
+    <dimen name="scanner_indicator_stroke">2dp</dimen>
+    <dimen name="scanner_indicator_margin">8dp</dimen> <!-- New dimension added -->
+    <dimen name="scanner_indicator_padding">4dp</dimen> <!-- New dimension added -->
+</resources>

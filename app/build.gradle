@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    namespace 'id.swtkiptr.keyboardscanner'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'id.swtkiptr.keyboardscanner'
+        minSdk 28
+        targetSdk 33 // Changed from 34 to 33 to avoid Settings restrictions
+        versionCode 1
+        versionName '1.0'
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled true // Enabled for optimization
+            shrinkResources true // Shrink unused resources
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            // Optional: Add debug-specific configurations if needed
+            minifyEnabled false
+        }
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    // Kotlin and coroutines
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22" // Use the latest stable version
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0' // Updated version
+
+    // AndroidX core libraries
+    implementation 'androidx.core:core-ktx:1.13.0' // Check for latest version
+    implementation 'androidx.appcompat:appcompat:1.7.0' // Check for latest version
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Material Design
+    implementation 'com.google.android.material:material:1.12.0' // Check for latest version
+
+    // Barcode scanning
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    // Settings/Preferences
+    implementation 'androidx.preference:preference-ktx:1.2.1'
+
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.0' // Check for latest version
+
+    // Optional: Add testing dependencies if needed
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

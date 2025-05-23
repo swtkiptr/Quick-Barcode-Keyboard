@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F5F5F5">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grant_perm"
+        app:layout_constraintBottom_toBottomOf="@id/scanner_indicator"
+        app:layout_constraintEnd_toEndOf="@id/scanner_indicator"
+        app:layout_constraintStart_toStartOf="@id/scanner_indicator"
+        app:layout_constraintTop_toTopOf="@id/scanner_indicator" />
+
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/zxing_scanner"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:keepScreenOn="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:zxing_framing_rect_height="250dp"
+        app:zxing_framing_rect_width="350dp"></com.journeyapps.barcodescanner.DecoratedBarcodeView>
+
+    <id.swtkiptr.keyboardscanner.scanner.ScannerIndicatorView
+        android:id="@+id/scanner_indicator"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="@id/zxing_scanner"
+        app:layout_constraintEnd_toEndOf="@id/zxing_scanner"
+        app:layout_constraintStart_toStartOf="@id/zxing_scanner"
+        app:layout_constraintTop_toTopOf="@id/zxing_scanner" />
+        
+    <!-- Tombol Switch Mode dan Flashlight dengan rasio 3:1 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/switchModeButton"
+            style="@style/SwitchModeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/keyBackgroundPressed"
+            android:padding="8dp"
+            android:text="@string/switch_to_keyboard"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/flashlightButton"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/flashlightButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/keyBackgroundPressed"
+            android:padding="8dp"
+            android:text="📸"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="0.5"
+            app:layout_constraintStart_toEndOf="@id/switchModeButton"
+            app:layout_constraintTop_toTopOf="@id/switchModeButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <id.swtkiptr.keyboardscanner.keyboard.CustomKeyboardView
+        android:id="@+id/keyboardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/keyboardBackground"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonContainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

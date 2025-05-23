@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Simple white keyboard colors -->
+    <color name="keyBackground">#FFFFFF</color>
+    <color name="keyBackgroundPressed">#E0E0E0</color>
+    <color name="keyBorder">#DDDDDD</color>
+    <color name="keyText">#212121</color>
+    <color name="keySpecial">#5C6BC0</color>
+    <color name="keyboardBackground">#EEEEEE</color>
+
+    <!-- Scanner indicator box -->
+    <color name="scanner_indicator">#1976D2</color>
+    <color name="scanner_indicator_active">#4CAF50</color>
+</resources>
+
